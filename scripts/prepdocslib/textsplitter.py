@@ -1,3 +1,4 @@
+import os
 from typing import Generator, List
 
 from .pdfparser import Page
@@ -21,9 +22,9 @@ class TextSplitter:
     def __init__(self, verbose: bool = False):
         self.sentence_endings = [".", "!", "?"]
         self.word_breaks = [",", ";", ":", " ", "(", ")", "[", "]", "{", "}", "\t", "\n"]
-        self.max_section_length = 1000
-        self.sentence_search_limit = 100
-        self.section_overlap = 100
+        self.max_section_length = os.environ["MAX_SECTION_LENGTH"] #1000 
+        self.sentence_search_limit = os.environ["SENTENCE_SEARCH_LIMIT"] #100
+        self.section_overlap = os.environ["SECTION_OVERLAP"] #100
         self.verbose = verbose
 
     def split_pages(self, pages: List[Page]) -> Generator[SplitPage, None, None]:
