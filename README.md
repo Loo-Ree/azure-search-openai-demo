@@ -459,3 +459,5 @@ Here are the most common failure scenarios and solutions:
 28. `MAX_SECTION_LENGTH="1000"`
 29. `SENTENCE_SEARCH_LIMIT="250"`
 30. `SECTION_OVERLAP="250"`
+31. `AZURE_SEARCH_KEY=""`
+32. `AZURE_SEARCH_SERVICE_CATEGORY="category"`
