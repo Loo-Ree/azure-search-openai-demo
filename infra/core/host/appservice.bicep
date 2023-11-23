@@ -87,6 +87,20 @@ resource appService 'Microsoft.Web/sites@2022-03-01' = {
       configAppSettings
     ]
   }
+
+  resource basicPublishingCredentialsPoliciesFtp 'basicPublishingCredentialsPolicies' = {
+    name: 'ftp'
+    properties: {
+      allow: false
+    }
+  }
+
+  resource basicPublishingCredentialsPoliciesScm 'basicPublishingCredentialsPolicies' = {
+    name: 'scm'
+    properties: {
+      allow: false
+    }
+  }
 }
 
 resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = if (!(empty(keyVaultName))) {
