@@ -44,16 +44,16 @@ export const Answer = ({
                         <IconButton
                             style={{ color: "black" }}
                             iconProps={{ iconName: "Lightbulb" }}
-                            title="Show thought process"
-                            ariaLabel="Show thought process"
+                            title="Mostra il ragionamento"
+                            ariaLabel="Mostra il ragionamento"
                             onClick={() => onThoughtProcessClicked()}
                             disabled={!answer.choices[0].context.thoughts?.length}
                         />
                         <IconButton
                             style={{ color: "black" }}
                             iconProps={{ iconName: "ClipboardList" }}
-                            title="Show supporting content"
-                            ariaLabel="Show supporting content"
+                            title="Mostra il contenuto a supporto"
+                            ariaLabel="Mostra il contenuto a supporto"
                             onClick={() => onSupportingContentClicked()}
                             disabled={!answer.choices[0].context.data_points?.length}
                         />

@@ -13,7 +13,6 @@ from core.messagebuilder import MessageBuilder
 from core.modelhelper import get_token_limit
 from text import nonewlines
 
-
 class ChatReadRetrieveReadApproach(Approach):
     # Chat roles
     SYSTEM = "system"
@@ -27,14 +26,14 @@ class ChatReadRetrieveReadApproach(Approach):
     then uses Azure AI Search to retrieve relevant documents, and then sends the conversation history,
     original user question, and search results to OpenAI to generate a response.
     """
-    system_message_chat_conversation = """Assistant helps the company employees with general questions, and questions about internal processes and news. Be brief in your answers. Always generate answers in Italian. 
+    system_message_chat_conversation = """Assistant helps Marina Militare with general questions, and questions about internal processes and news. Be brief in your answers. Always generate answers in Italian. 
 Answer ONLY with the facts listed in the list of sources below. If there isn't enough information below, say you don't know. Do not generate answers that don't use the sources below. If asking a clarifying question to the user would help, ask the question.
 For tabular information return it as an html table. Do not return markdown format. If the question is not in English, answer in the language used in the question.
 Each source has a name followed by colon and the actual information, always include the source name for each fact you use in the response. Use square brackets to reference the source, for example [info1.txt]. Don't combine sources, list each source separately, for example [info1.txt][info2.pdf].
 {follow_up_questions_prompt}
 {injected_prompt}
 """
-    follow_up_questions_prompt_content = """Generate 3 very brief follow-up questions that the user would likely ask next.
+    follow_up_questions_prompt_content = """Generate 3 very brief follow-up questions that the user would likely ask next. Always use Italian.
 Enclose the follow-up questions in double angle brackets. Example:
 <<Are there exclusions for prescriptions?>>
 <<Which pharmacies can be ordered from?>>
@@ -206,7 +205,7 @@ If you cannot generate a search query, return just the number 0.
         else:
             system_message = prompt_override.format(follow_up_questions_prompt=follow_up_questions_prompt)
 
-        response_token_limit = 1024
+        response_token_limit = 2048 
         messages_token_limit = self.chatgpt_token_limit - response_token_limit
         messages = self.get_messages_from_history(
             system_prompt=system_message,
