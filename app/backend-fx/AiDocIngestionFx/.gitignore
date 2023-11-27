@@ -133,3 +133,9 @@ __blobstorage__
 __queuestorage__
 __azurite_db*__.json
 .python_packages
+
+# Conf
+temp.json
+merged-template-almaresc.parameters.json
+merged-template-isp.parameters.json
+merged-template.json

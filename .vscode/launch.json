@@ -22,14 +22,21 @@
             ],
             "console": "integratedTerminal",
             "justMyCode": false,
-            "envFile": "${input:dotEnvFilePath}",
+            "envFile": "${input:dotEnvFilePath}"
         },
         {
             "name": "Frontend: watch",
             "type": "node-terminal",
             "request": "launch",
             "command": "npm run dev",
-            "cwd": "${workspaceFolder}/app/frontend",
+            "cwd": "${workspaceFolder}/app/frontend"
+        },
+        {
+            "name": "Attach to Python Functions",
+            "type": "python",
+            "request": "attach",
+            "port": 9091,
+            "preLaunchTask": "func: host start"
         }
     ],
     "inputs": [

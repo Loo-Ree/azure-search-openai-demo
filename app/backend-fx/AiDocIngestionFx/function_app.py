@@ -30,19 +30,19 @@ localpdfparser = False
 search_service_name = os.environ["AZURE_SEARCH_SERVICE"] #os.environ['az_search_service_name']
 search_creds = os.environ["AZURE_SEARCH_KEY"] #os.environ['az_search_key']
 search_index_name = os.environ["AZURE_SEARCH_INDEX"] #os.environ['az_search_index_name']
-search_service_category = os.environ['AZURE_SEARCH_SERVICE_CATEGORY'] #os.environ['az_search_service_category']
-inbound_doc_storage_account_connection_string = os.environ['AZURE_INBOUND_DOC_STORAGE_ACCOUNT_CONNECTION_STRING']
-outbound_doc_storage_account_name = os.environ['AZURE_STORAGE_ACCOUNT']
-oubdound_doc_storage_creds = os.environ['AZURE_OUTBOUND_DOC_STORAGE_ACCOUNT_KEY']
-outbound_doc_storage_account_container = os.environ['AZURE_STORAGE_CONTAINER']
-formrecognizerservice = os.environ['AZURE_FORMRECOGNIZER_SERVICE']
-formrecognizer_creds = os.environ['AZURE_FORMRECOGNIZER_KEY']
+search_service_category = os.environ['AZURE_SEARCH_SERVICE_CATEGORY'] #os.environ['az_search_service_category'] #field name
+inbound_doc_storage_account_connection_string = os.environ['AZURE_INBOUND_DOC_STORAGE_ACCOUNT_CONNECTION_STRING'] #os.environ['inbound_doc_storage_account_connection_string']
+outbound_doc_storage_account_name = os.environ['AZURE_STORAGE_ACCOUNT'] #os.environ['outbound_doc_storage_account_name']
+oubdound_doc_storage_creds = os.environ['AZURE_OUTBOUND_DOC_STORAGE_ACCOUNT_KEY'] #os.environ['outbound_doc_storage_account_key']
+outbound_doc_storage_account_container = os.environ['AZURE_STORAGE_CONTAINER'] #os.environ['outbound_doc_storage_account_container']
+formrecognizerservice = os.environ['AZURE_FORMRECOGNIZER_SERVICE'] #os.environ['form_recognizer_service']
+formrecognizer_creds = os.environ['AZURE_FORMRECOGNIZER_KEY'] #os.environ['form_recognizer_key']
 # Used by the OpenAI SDK
 openai_gpt_model = os.environ["AZURE_OPENAI_CHATGPT_MODEL"] #os.environ['openai_gpt_model']
 openai_emb_model = os.getenv("AZURE_OPENAI_EMB_MODEL_NAME", "text-embedding-ada-002") #os.environ['openai_emb_model']
 openai.api_type =  "azure_ad" #os.environ['openai_api_type'] #azure
 openai.api_base = f"https://{AZURE_OPENAI_SERVICE}.openai.azure.com" #f"https://{os.environ['openai_service_name']}.openai.azure.com"
-openai.api_version = "2023-07-01-preview" #"2022-12-01"
+openai.api_version = os.getenv("OPENAI_API_VERSION") #"2023-07-01-preview" #"2022-12-01"
 openai.api_key = os.getenv("OPENAI_API_KEY") #os.environ['openai_api_key']
 
 
