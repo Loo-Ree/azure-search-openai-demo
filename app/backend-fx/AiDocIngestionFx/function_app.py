@@ -89,7 +89,7 @@ def log_configuration(sensitive = False):
 @app.function_name(name="BlobTrigger1")
 @app.blob_trigger(arg_name="myblob", 
                   path="inbound-docs/{name}",
-                  connection="inbound_doc_storage_account_connection_string")
+                  connection="AZURE_INBOUND_DOC_STORAGE_ACCOUNT_CONNECTION_STRING")
 def test_function(myblob: func.InputStream):
    logging.info(f"Python blob trigger function processed blob \n"
                 f"Name: {myblob.name}\n"
@@ -99,7 +99,7 @@ def test_function(myblob: func.InputStream):
 
 
 @app.function_name(name="BlobDocsTrigger")
-@app.blob_trigger(arg_name="myblob", path="inbound-docs/{name}", connection="inbound_doc_storage_account_connection_string")
+@app.blob_trigger(arg_name="myblob", path="inbound-docs/{name}", connection="AZURE_INBOUND_DOC_STORAGE_ACCOUNT_CONNECTION_STRING")
 def blob_doc_trigger(myblob: func.InputStream):
     logging.info(f"Python blob trigger function processed blob \n"
                 f"Name: {myblob.name}\n"
