@@ -11,7 +11,7 @@ import re
 import time
 import json
 from tenacity import retry, wait_random_exponential, stop_after_attempt  
-from pypdf import PdfReader, PdfWriter
+from PyPDF2 import PdfReader, PdfWriter
 from azure.identity import AzureDeveloperCliCredential
 from azure.core.credentials import AzureKeyCredential
 from azure.storage.blob import BlobServiceClient
@@ -20,6 +20,7 @@ from azure.search.documents.indexes.models import *
 from azure.search.documents import SearchClient
 from azure.ai.formrecognizer import DocumentAnalysisClient
 import openai
+from azure.search.documents.indexes.models import VectorSearchAlgorithmConfiguration
 
 MAX_SECTION_LENGTH = os.environ["MAX_SECTION_LENGTH"] #1000
 SENTENCE_SEARCH_LIMIT = os.environ["SENTENCE_SEARCH_LIMIT"] #100
@@ -85,29 +86,17 @@ def log_configuration(sensitive = False):
 
 # Get started by running the following code to create a function using a HTTP trigger.
 
-@app.function_name(name="HelloFx")
-@app.route(route="hellofx")
-def test_function(req: func.HttpRequest) -> func.HttpResponse:
-     logging.info('Python HTTP trigger function processed a request.')
+@app.function_name(name="BlobTrigger1")
+@app.blob_trigger(arg_name="myblob", 
+                  path="inbound-docs/{name}",
+                  connection="inbound_doc_storage_account_connection_string")
+def test_function(myblob: func.InputStream):
+   logging.info(f"Python blob trigger function processed blob \n"
+                f"Name: {myblob.name}\n"
+                f"Blob Size: {myblob.length} bytes")
+   log_configuration()
 
-     log_configuration()
 
-     name = req.params.get('name')
-     if not name:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            name = req_body.get('name')
-
-     if name:
-        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
-     else:
-        return func.HttpResponse(
-             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
-             status_code=200
-        )
 
 @app.function_name(name="BlobDocsTrigger")
 @app.blob_trigger(arg_name="myblob", path="inbound-docs/{name}", connection="inbound_doc_storage_account_connection_string")
