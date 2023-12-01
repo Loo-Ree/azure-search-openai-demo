@@ -13,7 +13,9 @@ param allowCrossTenantReplication bool = true
 param allowSharedKeyAccess bool = true
 param containers array = []
 param defaultToOAuthAuthentication bool = false
-param deleteRetentionPolicy object = {}
+param deleteRetentionPolicy object = {
+  enabled: false
+}
 @allowed([ 'AzureDnsZone', 'Standard' ])
 param dnsEndpointType string = 'Standard'
 param kind string = 'StorageV2'
@@ -26,6 +28,7 @@ param networkAcls object = {
 @allowed([ 'Enabled', 'Disabled' ])
 param publicNetworkAccess string = 'Enabled'
 param sku object = { name: 'Standard_LRS' }
+param enableHierarchicalNamespaces bool = true
 
 resource storage 'Microsoft.Storage/storageAccounts@2022-05-01' = {
   name: name
@@ -44,6 +47,7 @@ resource storage 'Microsoft.Storage/storageAccounts@2022-05-01' = {
     networkAcls: networkAcls
     publicNetworkAccess: publicNetworkAccess
     supportsHttpsTrafficOnly: supportsHttpsTrafficOnly
+    isHnsEnabled: enableHierarchicalNamespaces
   }
 
   resource blobServices 'blobServices' = if (!empty(containers)) {
