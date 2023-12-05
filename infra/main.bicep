@@ -80,10 +80,10 @@ param allowedOrigin string = '' // should start with https://, shouldn't end wit
 param principalId string = ''
 
 @description('Use Application Insights for monitoring and performance tracing')
-param useApplicationInsights bool = false
+param useApplicationInsights bool = true
 
 var abbrs = loadJsonContent('abbreviations.json')
-var resourceToken = 'marinai' //toLower(uniqueString(subscription().id, environmentName, location))
+var resourceToken = 'm2marinai' //toLower(uniqueString(subscription().id, environmentName, location))
 var tags = { 'azd-env-name': environmentName }
 
 // Organize resources in a resource group
@@ -122,7 +122,7 @@ module monitoring './core/monitor/monitoring.bicep' = if (useApplicationInsights
 }
 
 
-module applicationInsightsDashboard 'backend-dashboard.bicep' = {
+module applicationInsightsDashboard 'backend-dashboard.bicep' = if (useApplicationInsights) {
   name: 'application-insights-dashboard'
   scope: resourceGroup
   params: {
@@ -263,7 +263,6 @@ module searchService 'core/search/search-services.bicep' = {
     sku: {
       name: searchServiceSkuName
     }
-    semanticSearch: 'free'
   }
 }
 
