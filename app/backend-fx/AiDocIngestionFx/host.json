@@ -8,8 +8,15 @@
       }
     }
   },
+  "extensions": {
+    "blobs": {
+        "maxDegreeOfParallelism": 1,
+        "poisonBlobThreshold": 2
+    }
+ },
+  "functionTimeout": "00:59:00",
   "extensionBundle": {
     "id": "Microsoft.Azure.Functions.ExtensionBundle",
-    "version": "[3.15.0, 4.0.0)"
+    "version": "[3.15.0, 5.0.0)"
   }
 }

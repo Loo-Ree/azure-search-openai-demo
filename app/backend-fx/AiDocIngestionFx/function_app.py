@@ -43,6 +43,7 @@ from prepdocslib.embeddings import (
 from prepdocslib.filestrategy import DocumentAction, FileStrategy
 from prepdocslib.listfilestrategy import (
     ADLSGen2ListFileStrategy,
+    ADLSGen2SingleFileStrategy,
     ListFileStrategy,
     LocalListFileStrategy,
 )
@@ -177,9 +178,9 @@ def setup_file_strategy() -> FileStrategy:
         verbose=True,
     ) 
 
-    print("Processing files...")
+    print("Processing file...")
     list_file_strategy: ListFileStrategy
-    list_file_strategy = ADLSGen2ListFileStrategy(
+    list_file_strategy = ADLSGen2SingleFileStrategy(
         data_lake_storage_account=outbound_doc_storage_account_name,
         data_lake_filesystem=inbound_doc_storage_account_container,
         data_lake_path="",
@@ -230,6 +231,8 @@ async def blob_doc_trigger(myblob: func.InputStream):
 
         logging.info("Before defining file_strategy")
         file_strategy = setup_file_strategy()
+
+        file_strategy.list_file_strategy.file_name=myblob.name
 
         logging.info("Before running file_strategy")
         await file_strategy.setup(search_info)
