@@ -9,7 +9,6 @@ param sku object = {
 
 param authOptions object = {}
 param disableLocalAuth bool = false
-param disabledDataExfiltrationOptions array = []
 param encryptionWithCmk object = {
   enforcement: 'Unspecified'
 }
@@ -29,14 +28,8 @@ param partitionCount int = 1
 ])
 param publicNetworkAccess string = 'enabled'
 param replicaCount int = 1
-@allowed([
-  'disabled'
-  'free'
-  'standard'
-])
-param semanticSearch string = 'disabled'
 
-resource search 'Microsoft.Search/searchServices@2021-04-01-preview' = {
+resource search 'Microsoft.Search/searchServices@2022-09-01' = {
   name: name
   location: location
   tags: tags
@@ -46,14 +39,12 @@ resource search 'Microsoft.Search/searchServices@2021-04-01-preview' = {
   properties: {
     authOptions: authOptions
     disableLocalAuth: disableLocalAuth
-    disabledDataExfiltrationOptions: disabledDataExfiltrationOptions
     encryptionWithCmk: encryptionWithCmk
     hostingMode: hostingMode
     networkRuleSet: networkRuleSet
     partitionCount: partitionCount
     publicNetworkAccess: publicNetworkAccess
     replicaCount: replicaCount
-    semanticSearch: semanticSearch
   }
   sku: sku
 }
