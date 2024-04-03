@@ -253,7 +253,7 @@ async def setup_clients():
     if OPENAI_HOST == "azure":
         openai.api_type = "azure_ad"
         openai.api_base = f"https://{AZURE_OPENAI_SERVICE}.openai.azure.com"
-        openai.api_version = "2023-07-01-preview"
+        openai.api_version = "2024-02-15-preview"  #"2023-07-01-preview"
         openai_token = await azure_credential.get_token("https://cognitiveservices.azure.com/.default")
         openai.api_key = openai_token.token
         # Store on app.config for later use inside requests

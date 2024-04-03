@@ -201,8 +201,7 @@ class ADLSGen2SingleFileStrategy(ListFileStrategy):
                     continue
                 
                 if path.name not in self.file_name:
-                    print(f"Skipping {path.name} as it is already present")
-                    logging.info(f"Skipping {path.name} as it is already present")
+                    # logging.info(f"Skipping {path.name} as it is already present")
                     continue
                 else:
                     print(f"Found {path.name} as the new file to be processed")
